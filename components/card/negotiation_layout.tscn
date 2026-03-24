@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwxd8os0jjku"]
+
+[ext_resource type="Texture2D" uid="uid://bdderm7j6ak1e" path="res://assets/Card/Base.png" id="1_jrja2"]
+
+[node name="NegotiationLayout" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 135.0
+offset_bottom = 240.0
+texture = ExtResource("1_jrja2")
+
+[node name="SuitIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Multiplier" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_right = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+horizontal_alignment = 2
+
+[node name="BaseValue" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -63.0
+offset_right = 40.0
+offset_bottom = -40.0
+grow_vertical = 0
+
+[node name="DotContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

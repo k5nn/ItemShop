@@ -1,45 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://xxvvy2kolfdp"]
+[gd_scene load_steps=4 format=3 uid="uid://xxvvy2kolfdp"]
 
 [ext_resource type="Script" uid="uid://dtag1mcp32d30" path="res://components/card/card.gd" id="1_7pfmn"]
-[ext_resource type="Texture2D" uid="uid://bdderm7j6ak1e" path="res://assets/Card/Base.png" id="2_hk754"]
+[ext_resource type="PackedScene" uid="uid://bwxd8os0jjku" path="res://components/card/negotiation_layout.tscn" id="2_hk754"]
+[ext_resource type="Script" uid="uid://dm1wog71ad3fr" path="res://components/card/negotiation_layout.gd" id="3_0nrb3"]
 
 [node name="Card" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_7pfmn")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="QualityLayout" parent="." instance=ExtResource("2_hk754")]
 layout_mode = 0
-texture = ExtResource("2_hk754")
-
-[node name="SuitIcon" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Multiplier" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
-horizontal_alignment = 2
-
-[node name="BaseValue" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
-grow_vertical = 0
-
-[node name="DotContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+script = ExtResource("3_0nrb3")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
