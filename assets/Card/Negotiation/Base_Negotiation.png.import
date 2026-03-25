@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cipwqmt0bxeec"
-path="res://.godot/imported/Utility.png-b1b53c9946f300afe35fa4fe08a33e9b.ctex"
+uid="uid://dxa4hpivqnmqr"
+path="res://.godot/imported/Base_Negotiation.png-d6f7124a1207b5acfa9f7ec509eb028e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Utility.png"
-dest_files=["res://.godot/imported/Utility.png-b1b53c9946f300afe35fa4fe08a33e9b.ctex"]
+source_file="res://assets/Card/Negotiation/Base_Negotiation.png"
+dest_files=["res://.godot/imported/Base_Negotiation.png-d6f7124a1207b5acfa9f7ec509eb028e.ctex"]
 
 [params]
 

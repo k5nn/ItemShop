@@ -4,69 +4,112 @@ class_name Card
 signal card_highlighted( inst : Card , cfg : Dictionary )
 signal card_deselected( inst : Card , cfg : Dictionary )
 
-const layouts = {
-	"Quality" : preload( "res://components/card/negotiation_layout.tscn" ) ,
-	"Battle" : true ,
-	"Negotiation" : true
-}
-
 var local_cfg := {}
 
 #create
-func get_default_cfg() -> Dictionary:
-	return {
-		"asset" : preload("res://assets/Card/Base.png") ,
-		"mode" : "quality" ,
-		"suit" : "Provenance" ,
+func create_default_cfg() -> Dictionary:
+	const default_quality = {
+		"bg" : preload("res://assets/Card/Quality/Base_Quality.png") ,
+		"mode" : "Quality" ,
+		"name" : "Provenance" ,
 		"base_value" : 10 ,
 		"plus_multiplier" : 0 ,
 		"modifiers" : [ "R" ]
 	}
+	const default_battle = {
+		"bg" : preload("res://assets/Card/Battle/Base_Battle.png") ,
+		"mode" : "Battle" ,
+		"name" : "Strike" ,
+		"effects" : { 
+			"HP_damage" : 6 
+		}
+	}
+	var ret_dict = {
+		"layouts" : {
+			"Quality" : preload( "res://components/card/quality_layout.tscn" ) ,
+			"Battle" : preload( "res://components/card/battle_layout.tscn" ) ,
+			"Negotiation" : true
+		}
+	}
+	#ret_dict.merge( default_quality )
+	ret_dict.merge( default_battle )
+	
+	return ret_dict
 #create
 
-#update
-func verify_and_set_cfg( cfg ) -> void :
-	
-	if !layouts.has( cfg.mode ) :
+#read
+func verify_cfg() -> void :
+	if !local_cfg.layouts.has( local_cfg.mode ) :
 		printerr( "invalid mode" )
-		get_tree().quit( 1 )
+		get_tree().quit( 11 )
 	
-	if layouts[ cfg.mode ] is PackedScene :
-		local_cfg.set( "instance" , layouts[ cfg.mode ].instantiate() )
-		local_cfg.instance.add_assets( {
-			"Provenance" : preload("res://assets/Card/Provenance.png") , 
-			"Utility" : preload("res://assets/Card/Utility.png") , 
-			"Durability" : preload("res://assets/Card/Durability.png") , 
-			"Craftsmanship" : preload("res://assets/Card/Craftsmanship.png") ,
-			"R" : preload( "res://assets/Card/modifier.png" ) ,
-			"G" : preload( "res://assets/Card/modifier.png" ) ,
-			"B" : preload( "res://assets/Card/modifier.png" ) ,
-			"Y" : preload( "res://assets/Card/modifier.png" ) ,
-		} )
-		add_child( local_cfg.instance )
+	var required_keys := []
 	
-	local_cfg = cfg
-	#apply_cfg( cfg )
+	if local_cfg.mode == "Quality" :
+		required_keys = [ "bg" , "mode" , "name" , "base_value" , "plus_multiplier" , "modifiers" ]
+	
+	if local_cfg.mode == "Battle" :
+		required_keys = [ "bg" , "mode" , "name" , "effects" ]
+	
+	for key in required_keys :
+		if local_cfg.get( key , null ) == null :
+			printerr( "missing key : " + key )
+			get_tree().quit( 12 )
+#read
 
-#func apply_cfg( cfg ) -> void :
-	#
-	#if cfg.mode == "quality" :
-		
-		#add_dots( local_cfg.modifiers )
-
-#func update_suit( target_suit : String ) :
-	#validate_suit( target_suit )
-	#local_cfg.suit = target_suit
-	#$SuitIcon.texture = suit_assets[ target_suit ]
-#
-#func update_base_value( base_value : int ) :
-	#local_cfg.base_value = base_value
-	#$BaseValue.text = str( base_value )
-#
-#func update_multiplier( plus_multiplier : int ) :
-	#local_cfg.plus_modifier = plus_multiplier
-	#$Multiplier.text = "+x" + str( plus_multiplier )
 #update
+#update
+
+#methods
+func apply_cfg() -> void :
+	
+	verify_cfg()
+	
+	if local_cfg.layouts[ local_cfg.mode ] is PackedScene :
+		
+		local_cfg.set( "instance" , local_cfg.layouts[ local_cfg.mode ].instantiate() )
+		var to_serialize := {}
+		var populate_args := {}
+		
+		if local_cfg.mode == "Quality" :
+			to_serialize = {
+				"Provenance" : preload("res://assets/Card/Quality/Provenance.png") , 
+				"Utility" : preload("res://assets/Card/Quality/Utility.png") , 
+				"Durability" : preload("res://assets/Card/Quality/Durability.png") , 
+				"Craftsmanship" : preload("res://assets/Card/Quality/Craftsmanship.png") ,
+				"R" : preload( "res://assets/Card/Quality/modifier.png" ) ,
+				"G" : preload( "res://assets/Card/Quality/modifier.png" ) ,
+				"B" : preload( "res://assets/Card/Quality/modifier.png" ) ,
+				"Y" : preload( "res://assets/Card/Quality/modifier.png" ) ,
+			}
+			populate_args = {
+				"bg" : local_cfg.bg ,
+				"mode" : local_cfg.mode ,
+				"name" : local_cfg.name ,
+				"base_value" : local_cfg.base_value ,
+				"plus_multiplier" : local_cfg.plus_multiplier ,
+				"modifiers" : local_cfg.modifiers
+			}
+		elif local_cfg.mode == "Battle" :
+			to_serialize = {
+				"Strike" : preload( "res://assets/Card/Battle/CardArt.png" ) ,
+				"HP_damage" : "Deal " + str( local_cfg.effects[ "HP_damage" ] ) + " damage"
+			}
+			populate_args = {
+				"bg" : local_cfg.bg ,
+				"mode" : local_cfg.mode ,
+				"name" : local_cfg.name ,
+				"effects" : local_cfg.effects
+			}
+		elif local_cfg.mode == "Negotiation" :
+			to_serialize = {}
+			populate_args = {}
+			
+		local_cfg.instance.create_keys( to_serialize )
+		local_cfg.instance.populate_layout( populate_args )
+		add_child( local_cfg.instance )
+			
+#methods
 
 #events
 func _on_mouse_entered() -> void:
@@ -84,15 +127,10 @@ func _on_mouse_exited() -> void:
 	emit_signal( "card_deselected" , self , local_cfg )
 #events
 
-func _ready() -> void:
-	
+func _ready() -> void:	
 	if self.get_parent() is Window :
-		verify_and_set_cfg( get_default_cfg() )
+		local_cfg = create_default_cfg()
+		apply_cfg()
 		self.position = get_viewport_rect().size * 0.25
-		
-	$SuitIcon.position = $Background.texture.get_size() * 0.05
-	$Multiplier.position = $Background.texture.get_size() * Vector2( 0.55 , 0.05 )
-	$BaseValue.position =  $Background.texture.get_size() * Vector2( 0.1 , 0.85 )
-	$DotContainer.position = $Background.texture.get_size() * Vector2( 0.3 , 0.15 )
 	
 	local_cfg.set( "orig_position" , self.position )

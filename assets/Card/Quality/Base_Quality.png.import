@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pce57m61ytaw"
-path="res://.godot/imported/Craftsmanship.png-19cb91808d0f7765fe04b0ce1dd47274.ctex"
+uid="uid://rl5pgk62sn7k"
+path="res://.godot/imported/Base_Quality.png-9662a3054831ec922237e7f51988d13a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Craftsmanship.png"
-dest_files=["res://.godot/imported/Craftsmanship.png-19cb91808d0f7765fe04b0ce1dd47274.ctex"]
+source_file="res://assets/Card/Quality/Base_Quality.png"
+dest_files=["res://.godot/imported/Base_Quality.png-9662a3054831ec922237e7f51988d13a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dste5ti436hpi"
-path="res://.godot/imported/modifier.png-4bdd25eb35336dc00f39b305a2710b85.ctex"
+uid="uid://yj0bqbpo1rxt"
+path="res://.godot/imported/Durability.png-b498daf214d2bed3f03faaf46796ff94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/modifier.png"
-dest_files=["res://.godot/imported/modifier.png-4bdd25eb35336dc00f39b305a2710b85.ctex"]
+source_file="res://assets/Card/Quality/Durability.png"
+dest_files=["res://.godot/imported/Durability.png-b498daf214d2bed3f03faaf46796ff94.ctex"]
 
 [params]
 

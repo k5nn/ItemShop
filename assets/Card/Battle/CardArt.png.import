@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm6h4cawlf0h7"
-path="res://.godot/imported/Durability.png-03849983d23476413d1e6ba5046b7d44.ctex"
+uid="uid://be1tyewr7rbmk"
+path="res://.godot/imported/CardArt.png-5ed8ad70d4489009b6e511775bc48150.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Durability.png"
-dest_files=["res://.godot/imported/Durability.png-03849983d23476413d1e6ba5046b7d44.ctex"]
+source_file="res://assets/Card/Battle/CardArt.png"
+dest_files=["res://.godot/imported/CardArt.png-5ed8ad70d4489009b6e511775bc48150.ctex"]
 
 [params]
 

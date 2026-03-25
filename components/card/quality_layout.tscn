@@ -1,18 +1,19 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwxd8os0jjku"]
 
-[ext_resource type="Texture2D" uid="uid://bdderm7j6ak1e" path="res://assets/Card/Base.png" id="1_jrja2"]
+[ext_resource type="Script" uid="uid://dm1wog71ad3fr" path="res://components/card/quality_layout.gd" id="1_ud7wt"]
 
-[node name="NegotiationLayout" type="Control"]
+[node name="QualityLayout" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("1_ud7wt")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 135.0
 offset_bottom = 240.0
-texture = ExtResource("1_jrja2")
 
 [node name="SuitIcon" type="TextureRect" parent="."]
 layout_mode = 0

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5l6400cyrtfe"]
+
+[ext_resource type="Script" uid="uid://dm1wog71ad3fr" path="res://components/card/quality_layout.gd" id="1_0dwbq"]
+
+[node name="QualityLayout" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("1_0dwbq")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardArt" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_right = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+horizontal_alignment = 2
