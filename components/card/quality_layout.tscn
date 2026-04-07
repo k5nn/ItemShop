@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwxd8os0jjku"]
 
-[ext_resource type="Script" uid="uid://dm1wog71ad3fr" path="res://components/card/quality_layout.gd" id="1_ud7wt"]
+[ext_resource type="Script" uid="uid://dm1wog71ad3fr" path="res://components/card/card_layout.gd" id="1_ud7wt"]
 
 [node name="QualityLayout" type="Control"]
 layout_mode = 3

@@ -52,8 +52,8 @@ func validate_generic_effects( effects : Variant ) :
 #read
 
 #update
-func add_modifiers( modifiers : Array ) :
-	if modifiers.size() == 0 :
+func add_modifiers( modifiers : Dictionary ) :
+	if modifiers.is_empty() :
 		return
 	
 	for child in $DotContainer.get_children() :
