@@ -1,14 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwxd8os0jjku"]
 
-[ext_resource type="Script" uid="uid://dm1wog71ad3fr" path="res://components/card/card_layout.gd" id="1_ud7wt"]
+[ext_resource type="Script" uid="uid://dm1wog71ad3fr" path="res://components/card/layout_card.gd" id="1_upjcy"]
 
-[node name="QualityLayout" type="Control"]
+[node name="Layout" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
-script = ExtResource("1_ud7wt")
+script = ExtResource("1_upjcy")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0

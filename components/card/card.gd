@@ -8,46 +8,17 @@ var local_cfg := {}
 
 #create
 func create_default_cfg() -> Dictionary:
-	const default_quality = {
-		"bg" : preload("res://assets/Card/Quality/Base_Quality.png") ,
-		"mode" : "Quality" ,
-		"name" : "Provenance" ,
-		"base_value" : 10 ,
-		"plus_multiplier" : 0 ,
-		"effects" : {
-			"R" : true
-		}
-	}
-	const default_battle = {
-		"bg" : preload("res://assets/Card/Battle/Base_Battle.png") ,
-		"mode" : "Battle" ,
-		"name" : "Strike" ,
-		"effects" : { 
-			"HP_damage" : 6 
-		}
-	}
-	var ret_dict = {
-		"layouts" : {
-			"Quality" : preload( "res://components/card/quality_layout.tscn" ) ,
-			"Battle" : preload( "res://components/card/battle_layout.tscn" ) ,
-			"Negotiation" : true
-		} ,
-	}
-	ret_dict.merge( default_quality )
-	#ret_dict.merge( default_battle )
+	var global = Global.new()
+	var default_quality = global.defaults.card.quality
+	var default_battle = global.defaults.card.battle
+	var ret_dict = global.defaults.card.ret_dict
+	
+	#ret_dict.merge( default_quality )
+	ret_dict.merge( default_battle )
 	
 	if ret_dict.mode == "Quality" :
 		var to_merge = {
-			"to_serialize" : {
-				"Provenance" : preload("res://assets/Card/Quality/Provenance.png") , 
-				"Utility" : preload("res://assets/Card/Quality/Utility.png") , 
-				"Durability" : preload("res://assets/Card/Quality/Durability.png") , 
-				"Craftsmanship" : preload("res://assets/Card/Quality/Craftsmanship.png") ,
-				"R" : preload( "res://assets/Card/Quality/modifier.png" ) ,
-				"G" : preload( "res://assets/Card/Quality/modifier.png" ) ,
-				"B" : preload( "res://assets/Card/Quality/modifier.png" ) ,
-				"Y" : preload( "res://assets/Card/Quality/modifier.png" ) ,
-			} ,
+			"to_serialize" : global.defaults.card.quality.to_serialize ,
 			"populate_args" : {
 				"bg" : ret_dict.bg ,
 				"mode" : ret_dict.mode ,
@@ -55,20 +26,12 @@ func create_default_cfg() -> Dictionary:
 				"base_value" : ret_dict.base_value ,
 				"plus_multiplier" : ret_dict.plus_multiplier ,
 				"effects" : ret_dict.effects
-			} 
+			}
 		}
 		ret_dict.merge( to_merge )
 	elif ret_dict.mode == "Battle" :
-		var to_serialize = {
-			"Strike" : preload( "res://assets/Card/Battle/CardArt.png" ) ,
-		}
-		
-		for effect in ret_dict.effects :
-			if effect == "HP_damage" : 
-				to_serialize.set( effect , "Deal " + str( ret_dict.effects[ "HP_damage" ] ) + " damage" )
-		
 		var to_merge = {
-			"to_serialize" : to_serialize ,
+			"to_serialize" : global.defaults.card.battle.to_serialize ,
 			"populate_args" : {
 				"bg" : ret_dict.bg ,
 				"mode" : ret_dict.mode ,
@@ -94,6 +57,8 @@ func verify_cfg() -> void :
 	
 	if local_cfg.mode == "Battle" :
 		required_keys = [ "bg" , "mode" , "name" , "effects" ]
+		
+	required_keys.append_array( [ "to_serialize" , "populate_args" ] )
 	
 	for key in required_keys :
 		if local_cfg.get( key , null ) == null :
@@ -114,7 +79,7 @@ func apply_cfg() -> void :
 		local_cfg.set( "instance" , local_cfg.layouts[ local_cfg.mode ].instantiate() )
 		var to_serialize := {}
 		var populate_args := {}
-			
+		
 		local_cfg.instance.create_keys( local_cfg.to_serialize )
 		local_cfg.instance.populate_layout( local_cfg.populate_args )
 		add_child( local_cfg.instance )
