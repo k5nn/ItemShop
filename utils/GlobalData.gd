@@ -2,8 +2,9 @@ extends Node
 class_name Global
 
 var debug_obj = {
-	"debug" : true ,
-	"debug_case" : 1
+	"card" : {
+		"key_output" : true ,
+	} ,
 }
 
 var defaults = {
@@ -28,9 +29,9 @@ var defaults = {
 				"Y" : preload( "res://assets/Card/Quality/modifier.png" ) ,
 			}
 		} ,
-		"battle" : {
-			"bg" : preload("res://assets/Card/Battle/Base_Battle.png") ,
-			"mode" : "Battle" ,
+		"action" : {
+			"bg" : preload("res://assets/Card/Action/Base_Action.png") ,
+			"mode" : "Action" ,
 			"name" : "Strike" ,
 			"effects" : { 
 				"HP_damage" : 6 
@@ -40,15 +41,24 @@ var defaults = {
 		"ret_dict" : {
 			"layouts" : {
 				"Quality" : preload( "res://components/card/layout_quality.tscn" ) ,
-				"Battle" : preload( "res://components/card/layout_battle.tscn" ) ,
+				"Action" : preload( "res://components/card/layout_action.tscn" ) ,
 			} ,
 		} ,
 	} ,
+	"card_game" : {
+		"mode" : "Negotiation"
+	}
+}
+
+var decks = {
+	"negotiation" : [
+		{  }
+	]
 }
 
 func serialize_battle_card_data( card_name : String , effects : Dictionary ) -> Dictionary :
 	const asset_src = {
-		"Strike" : preload( "res://assets/Card/Battle/CardArt.png" ) ,
+		"Strike" : preload( "res://assets/Card/Action/CardArt.png" ) ,
 	}
 	var to_serialize = {}
 	

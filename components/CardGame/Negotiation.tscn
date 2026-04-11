@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://vjt4aw4qmlod"]
+
+[ext_resource type="Script" uid="uid://bwj20nqkxthrq" path="res://components/CardGame/card_game.gd" id="1_bwrim"]
+
+[node name="Negotiation" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bwrim")

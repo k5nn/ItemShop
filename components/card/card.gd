@@ -4,17 +4,18 @@ class_name Card
 signal card_highlighted( inst : Card , cfg : Dictionary )
 signal card_deselected( inst : Card , cfg : Dictionary )
 
+var global = Global.new()
 var local_cfg := {}
 
 #create
 func create_default_cfg() -> Dictionary:
-	var global = Global.new()
+	
 	var default_quality = global.defaults.card.quality
-	var default_battle = global.defaults.card.battle
+	var default_action = global.defaults.card.action
 	var ret_dict = global.defaults.card.ret_dict
 	
 	#ret_dict.merge( default_quality )
-	ret_dict.merge( default_battle )
+	ret_dict.merge( default_action )
 	
 	if ret_dict.mode == "Quality" :
 		var to_merge = {
@@ -29,9 +30,9 @@ func create_default_cfg() -> Dictionary:
 			}
 		}
 		ret_dict.merge( to_merge )
-	elif ret_dict.mode == "Battle" :
+	elif ret_dict.mode == "Action" :
 		var to_merge = {
-			"to_serialize" : global.defaults.card.battle.to_serialize ,
+			"to_serialize" : global.defaults.card.action.to_serialize ,
 			"populate_args" : {
 				"bg" : ret_dict.bg ,
 				"mode" : ret_dict.mode ,
@@ -55,7 +56,7 @@ func verify_cfg() -> void :
 	if local_cfg.mode == "Quality" :
 		required_keys = [ "bg" , "mode" , "name" , "base_value" , "plus_multiplier" , "effects" ]
 	
-	if local_cfg.mode == "Battle" :
+	if local_cfg.mode == "Action" :
 		required_keys = [ "bg" , "mode" , "name" , "effects" ]
 		
 	required_keys.append_array( [ "to_serialize" , "populate_args" ] )
@@ -83,7 +84,6 @@ func apply_cfg() -> void :
 		local_cfg.instance.create_keys( local_cfg.to_serialize )
 		local_cfg.instance.populate_layout( local_cfg.populate_args )
 		add_child( local_cfg.instance )
-			
 #methods
 
 #events
@@ -102,7 +102,7 @@ func _on_mouse_exited() -> void:
 	emit_signal( "card_deselected" , self , local_cfg )
 #events
 
-func _ready() -> void:	
+func _ready() -> void:
 	if self.get_parent() is Window :
 		local_cfg = create_default_cfg()
 		apply_cfg()

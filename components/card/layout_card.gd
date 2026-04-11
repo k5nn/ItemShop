@@ -1,10 +1,15 @@
 extends Control
 
 var asset_dictionary := {}
+var global = Global.new()
 
 #create
 func create_keys( assets : Dictionary ) :
 	for key in assets :
+		
+		if global.debug_obj.card.key_output :
+			print( key )
+			
 		asset_dictionary.set( key , assets[ key ] )
 #create
 
@@ -48,7 +53,6 @@ func validate_generic_effects( effects : Variant ) :
 				printerr( "Invalid dot modifier" )
 				get_tree().quit( 4 )
 		return
-	
 #read
 
 #update
@@ -93,7 +97,7 @@ func populate_layout( args : Dictionary ) :
 		add_modifiers( args.effects )
 		return
 	
-	if args.mode == "Battle" :
+	if args.mode == "Action" :
 		
 		validate_generic_str( args.name )
 		validate_generic_effects( args.effects )
@@ -104,7 +108,7 @@ func populate_layout( args : Dictionary ) :
 		$Description.position = $Background.texture.get_size() * Vector2( 0.3 , 0.6 )
 		$Description.custom_minimum_size = $Background.texture.get_size() * Vector2( 0.95 , 0.35 )
 		for effect in args.effects :
-			$Description.text = asset_dictionary[ effect ] + "\n"
+			$Description.text += asset_dictionary[ effect ] + "\n"
 		return
 		
 #methods
