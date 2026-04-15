@@ -5,6 +5,8 @@ var global = Global.new()
 
 #create
 func create_keys( assets : Dictionary ) :
+	assert( !assets.is_empty() )
+	
 	for key in assets :
 		
 		if global.debug_obj.card.key_output :
@@ -15,48 +17,41 @@ func create_keys( assets : Dictionary ) :
 
 #read
 func validate_generic_str( generic : String ) :
-	if !asset_dictionary.has( generic ) :
-		printerr( "Invalid : " + generic )
-		get_tree().quit( 1 )
+	
+	if global.debug_obj.card.validate_output :
+		print( { 
+			"dict" : asset_dictionary , 
+			"generic" : generic , 
+		}  )
+	assert( asset_dictionary.has( generic ) )
 
 func validate_generic_int( generic : int , lo_limit : int , hi_limit : int ) :
-	if generic < lo_limit :
-		printerr( "Lo Limit : " + str(generic) )
-		get_tree().quit( 2 )
 	
-	if generic > hi_limit :
-		printerr( "Hi Limit : " + str( generic ) )
-		get_tree().quit( 2 )
+	if global.debug_obj.card.validate_output :
+		print( {
+			"limits" : { "lo" : lo_limit , "hi" : hi_limit } ,
+			"generic" : generic ,
+			"lo_not_hit" : generic > lo_limit ,
+			"hi_not_hit" : generic < hi_limit
+		} )
+	assert( generic > lo_limit and generic < hi_limit )
 
-func validate_generic_effects( effects : Variant ) :
-	
-	if effects is Dictionary :
-		if effects.is_empty() :
-			printerr( "No Effects" )
-			get_tree().quit( 4 )
-		
-		for effect in effects :
-			if !asset_dictionary.has( effect ) :
-				printerr( "Invalid Effect" )
-				get_tree().quit( 4 )
-			
-			validate_generic_int( effects[ effect ] , -100 , 100 )
-		return
-				
-	if effects is Array :
-		if effects.size() > 3 :
-			printerr( "Too many modifiers" )
-			get_tree().quit( 4 )
-	
-		for modifier in effects :
-			if !asset_dictionary.has( modifier ) :
-				printerr( "Invalid dot modifier" )
-				get_tree().quit( 4 )
-		return
+func validate_generic_effects( generic : Array , max_size : int ) :
+	if global.debug_obj.card.validate_output :
+		print( {
+			"dict" : asset_dictionary ,
+			"generic" : generic ,
+			"generic_size" : generic.size()
+		} )
+	assert( generic.size() <= max_size )
+
+	for modifier in generic : 
+		assert( asset_dictionary.has( modifier ) )
+	return
 #read
 
 #update
-func add_modifiers( modifiers : Dictionary ) :
+func add_modifiers( modifiers : Array ) :
 	if modifiers.is_empty() :
 		return
 	
@@ -74,24 +69,20 @@ func add_modifiers( modifiers : Dictionary ) :
 
 #methods
 func populate_layout( args : Dictionary ) :
-	
+		
 	$Background.texture = args.bg
 	
 	if args.mode == "Quality" :
 		
 		validate_generic_str( args.name )
-		validate_generic_int( args.base_value , 0 , 10000 )
-		validate_generic_int( args.plus_multiplier , 0 , 10 )
-		validate_generic_effects( args.effects )
+		validate_generic_int( args.value , 0 , 10000 )
+		validate_generic_effects( args.effects , 3 )
 		
 		$SuitIcon.position = $Background.texture.get_size() * 0.05
 		$SuitIcon.texture = asset_dictionary[ args.name ]
 		
-		$Multiplier.position = $Background.texture.get_size() * Vector2( 0.3 , 0.05 )
-		$Multiplier.text = "+x" + str( args.plus_multiplier )
-		
 		$BaseValue.position =  $Background.texture.get_size() * Vector2( 0.05 , 0.7 )
-		$BaseValue.text = str( args.base_value )
+		$BaseValue.text = str( args.value )
 		
 		$DotContainer.position = $Background.texture.get_size() * Vector2( 0.3 , 0.15 )
 		add_modifiers( args.effects )
@@ -100,7 +91,7 @@ func populate_layout( args : Dictionary ) :
 	if args.mode == "Action" :
 		
 		validate_generic_str( args.name )
-		validate_generic_effects( args.effects )
+		validate_generic_effects( args.effects , 2 )
 		
 		$CardArt.position = $Background.texture.get_size() * 0.05
 		$CardArt.texture = asset_dictionary[ args.name ]

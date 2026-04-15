@@ -10,12 +10,10 @@ var local_cfg := {}
 #create
 func create_default_cfg() -> Dictionary:
 	
-	var default_quality = global.defaults.card.quality
-	var default_action = global.defaults.card.action
 	var ret_dict = global.defaults.card.ret_dict
 	
-	#ret_dict.merge( default_quality )
-	ret_dict.merge( default_action )
+	ret_dict.merge( global.defaults.card.quality )
+	#ret_dict.merge( global.defaults.card.action )
 	
 	if ret_dict.mode == "Quality" :
 		var to_merge = {
@@ -24,8 +22,7 @@ func create_default_cfg() -> Dictionary:
 				"bg" : ret_dict.bg ,
 				"mode" : ret_dict.mode ,
 				"name" : ret_dict.name ,
-				"base_value" : ret_dict.base_value ,
-				"plus_multiplier" : ret_dict.plus_multiplier ,
+				"value" : ret_dict.value ,
 				"effects" : ret_dict.effects
 			}
 		}
@@ -51,20 +48,18 @@ func verify_cfg() -> void :
 		printerr( "invalid mode" )
 		get_tree().quit( 11 )
 	
-	var required_keys := []
+	var required_keys := [ "bg" , "mode" , "name" , "effects" , "to_serialize" , "populate_args" ]
 	
 	if local_cfg.mode == "Quality" :
-		required_keys = [ "bg" , "mode" , "name" , "base_value" , "plus_multiplier" , "effects" ]
-	
-	if local_cfg.mode == "Action" :
-		required_keys = [ "bg" , "mode" , "name" , "effects" ]
-		
-	required_keys.append_array( [ "to_serialize" , "populate_args" ] )
+		required_keys.append( "value" )
 	
 	for key in required_keys :
-		if local_cfg.get( key , null ) == null :
-			printerr( "card > verify_cfg > missing key : " + key )
-			get_tree().quit( 12 )
+		if global.debug_obj.card.config_output :
+			print( { 
+				"key" : key ,
+				"config" : local_cfg
+			} )
+		assert( local_cfg.has( key ) )
 #read
 
 #update

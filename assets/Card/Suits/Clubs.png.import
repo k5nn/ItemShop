@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciuyw4opw61rn"
-path="res://.godot/imported/Provenance.png-98638371c4e2b938424ed10da588adaa.ctex"
+uid="uid://cdy2sh1amwr2a"
+path="res://.godot/imported/Clubs.png-c27f4e5dfa1e5014723289223c0ecd4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Quality/Provenance.png"
-dest_files=["res://.godot/imported/Provenance.png-98638371c4e2b938424ed10da588adaa.ctex"]
+source_file="res://assets/Card/Suits/Clubs.png"
+dest_files=["res://.godot/imported/Clubs.png-c27f4e5dfa1e5014723289223c0ecd4d.ctex"]
 
 [params]
 

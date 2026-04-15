@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brgwtp4pijy3p"
-path="res://.godot/imported/Craftsmanship.png-9d11b9424900108d35dce34b3bf8b106.ctex"
+uid="uid://rl5pgk62sn7k"
+path="res://.godot/imported/Base_Suit.png-7cd8916cff7d0d5ed4f6f3121a65b197.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Quality/Craftsmanship.png"
-dest_files=["res://.godot/imported/Craftsmanship.png-9d11b9424900108d35dce34b3bf8b106.ctex"]
+source_file="res://assets/Card/Suits/Base_Suit.png"
+dest_files=["res://.godot/imported/Base_Suit.png-7cd8916cff7d0d5ed4f6f3121a65b197.ctex"]
 
 [params]
 

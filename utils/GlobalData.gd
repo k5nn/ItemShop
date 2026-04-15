@@ -1,68 +1,82 @@
 extends Node
 class_name Global
 
+const suits = [ "Coins" , "Clubs" , "Cups" , "Swords" ]
+const values = [ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 ]
+const negoation_actions = [ "Think" ]
+
 var debug_obj = {
 	"card" : {
-		"key_output" : true ,
+		"config_output" : true ,
+		"key_output" : false ,
+		"validate_output" : true ,
 	} ,
 }
 
 var defaults = {
 	"card" : {
 		"quality" : {
-			"bg" : preload("res://assets/Card/Quality/Base_Quality.png") ,
+			"bg" : preload("res://assets/Card/Suits/Base_Suit.png") ,
 			"mode" : "Quality" ,
-			"name" : "Provenance" ,
-			"base_value" : 10 ,
-			"plus_multiplier" : 0 ,
-			"effects" : {
-				"R" : true
-			} ,
+			"name" : suits.pick_random() ,
+			"value" : values.pick_random() ,
+			"effects" : [] ,
 			"to_serialize" : {
-				"Provenance" : preload("res://assets/Card/Quality/Provenance.png") , 
-				"Utility" : preload("res://assets/Card/Quality/Utility.png") , 
-				"Durability" : preload("res://assets/Card/Quality/Durability.png") , 
-				"Craftsmanship" : preload("res://assets/Card/Quality/Craftsmanship.png") ,
-				"R" : preload( "res://assets/Card/Quality/modifier.png" ) ,
-				"G" : preload( "res://assets/Card/Quality/modifier.png" ) ,
-				"B" : preload( "res://assets/Card/Quality/modifier.png" ) ,
-				"Y" : preload( "res://assets/Card/Quality/modifier.png" ) ,
+				"Clubs" : preload("res://assets/Card/Suits/Clubs.png") , 
+				"Coins" : preload("res://assets/Card/Suits/Coins.png") , 
+				"Cups" : preload("res://assets/Card/Suits/Cups.png") , 
+				"Swords" : preload("res://assets/Card/Suits/Swords.png") ,
+				"R" : preload( "res://assets/Card/Suits/modifier.png" ) ,
+				"G" : preload( "res://assets/Card/Suits/modifier.png" ) ,
+				"B" : preload( "res://assets/Card/Suits/modifier.png" ) ,
+				"Y" : preload( "res://assets/Card/Suits/modifier.png" ) ,
 			}
 		} ,
 		"action" : {
 			"bg" : preload("res://assets/Card/Action/Base_Action.png") ,
 			"mode" : "Action" ,
 			"name" : "Strike" ,
-			"effects" : { 
-				"HP_damage" : 6 
-			} ,
-			"to_serialize" : serialize_battle_card_data( "Strike" , { "HP_damage" : 6 } )
+			"effects" : [ "Enemy_damage" ] ,
+			"to_serialize" : serialize_action_card( "Strike" , { "Enemy_damage" : 6 } )
 		} ,
 		"ret_dict" : {
 			"layouts" : {
-				"Quality" : preload( "res://components/card/layout_quality.tscn" ) ,
+				"Quality" : preload( "res://components/card/layout_suit.tscn" ) ,
 				"Action" : preload( "res://components/card/layout_action.tscn" ) ,
 			} ,
 		} ,
 	} ,
-	"card_game" : {
-		"mode" : "Negotiation"
+	"scopa" : {
+		"deck": [] ,
+		"board": {
+			"floor": []
+		},
+		"player": {
+			"hand": [],
+			"captured": [],
+			"scopas": 0
+		},
+		"opponent": {
+			"hand": [],
+			"captured": [],
+			"scopas": 0
+		},
+		"turn": "player",
+		"last_capturer": null,
+		"score": {
+			"player": 0,
+			"opponent": 0
+		}
 	}
 }
 
-var decks = {
-	"negotiation" : [
-		{  }
-	]
-}
-
-func serialize_battle_card_data( card_name : String , effects : Dictionary ) -> Dictionary :
+func serialize_action_card( card_name : String , effects : Dictionary ) -> Dictionary :
 	const asset_src = {
 		"Strike" : preload( "res://assets/Card/Action/CardArt.png" ) ,
 	}
 	var to_serialize = {}
 	
-	to_serialize.set( card_name , asset_src[ card_name ] )
+	to_serialize.set( "card_art" , asset_src[ card_name ] )
 	
 	for effect in effects :
 		if effect == "HP_damage" : 
