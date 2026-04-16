@@ -1,8 +1,15 @@
 extends Node
 class_name Global
 
-const values = [ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 ]
-const negotiation_entities = {
+const debug_obj = {
+	"card" : {
+		"config_output" : true ,
+		"key_output" : false ,
+		"validate_output" : true ,
+	} ,
+}
+const values := [ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 ]
+const negotiation_entities := {
 	"suits" : {
 		"Coins" : {
 			"asset" : preload("res://assets/Card/Suits/Coins.png") ,
@@ -21,7 +28,7 @@ const negotiation_entities = {
 			"tooltip" : ""
 		}
 	} ,
-	"stickers" : {
+	"effects" : {
 		"R" : {
 			"asset" : preload( "res://assets/Card/Suits/modifier.png" ) ,
 			"effects" : "" ,
@@ -43,27 +50,32 @@ const negotiation_entities = {
 			"tooltip" : ""
 		}
 	} ,
-	"actions" : {}
+	"actions" : {
+		"Think" : {
+			"asset" : preload( "res://assets/Card/Action/CardArt.png" ) ,
+			"effects" : "Add_Player_Hand" ,
+			"value" : 1 ,
+			"tooltip" : "Draw 1 Card" 
+		}
+	}
 }
-
-const negoation_actions = [ "Think" ]
-
-var debug_obj = {
-	"card" : {
-		"config_output" : true ,
-		"key_output" : false ,
-		"validate_output" : true ,
-	} ,
+const battle_entities := {
+	"actions" : {
+		"Strike" : {
+			"asset" : preload( "res://assets/Card/Action/CardArt.png" ) ,
+			"effects" : "Target_HP_target" ,
+			"value" : 6 ,
+			"tooltip" : "Deal 6 Damage" 
+		}
+	}
 }
-
-var suit_choice = negotiation_entities.suits.keys().pick_random()
 
 var defaults = {
 	"card" : {
 		"quality" : {
 			"bg" : preload("res://assets/Card/Suits/Base_Suit.png") ,
 			"mode" : "Quality" ,
-			"name" : suit_choice ,
+			"name" : negotiation_entities.suits.keys().pick_random() ,
 			"value" : values.pick_random() ,
 			"effects" : [] ,
 			"to_serialize" : {
@@ -79,9 +91,8 @@ var defaults = {
 		} ,
 		"action" : {
 			"bg" : preload("res://assets/Card/Action/Base_Action.png") ,
-			"mode" : "Action" ,
-			"name" : "Strike" ,
-			"effects" : [ "Enemy_damage" ] ,
+			"mode" : "Battle" ,
+			"name" : battle_entities.suits.keys().pick_random() ,
 			"to_serialize" : serialize_action_card( "Strike" , { "Enemy_damage" : 6 } )
 		} ,
 		"ret_dict" : {
