@@ -1,8 +1,51 @@
 extends Node
 class_name Global
 
-const suits = [ "Coins" , "Clubs" , "Cups" , "Swords" ]
 const values = [ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 ]
+const negotiation_entities = {
+	"suits" : {
+		"Coins" : {
+			"asset" : preload("res://assets/Card/Suits/Coins.png") ,
+			"tooltip" : ""
+		} ,
+		"Clubs" : {
+			"asset" : preload("res://assets/Card/Suits/Coins.png") ,
+			"tooltip" : ""
+		} ,
+		"Cups" : {
+			"asset" : preload("res://assets/Card/Suits/Coins.png") ,
+			"tooltip" : ""
+		} ,
+		"Swords" : {
+			"asset" : preload( "res://assets/Card/Suits/Swords.png" ) ,
+			"tooltip" : ""
+		}
+	} ,
+	"stickers" : {
+		"R" : {
+			"asset" : preload( "res://assets/Card/Suits/modifier.png" ) ,
+			"effects" : "" ,
+			"tooltip" : ""
+		} ,
+		"G" : {
+			"asset" : preload( "res://assets/Card/Suits/modifier.png" ) ,
+			"effects" : "" ,
+			"tooltip" : ""
+		} ,
+		"B" : {
+			"asset" : preload( "res://assets/Card/Suits/modifier.png" ) ,
+			"effects" : "" ,
+			"tooltip" : ""
+		} ,
+		"Y" : {
+			"asset" : preload( "res://assets/Card/Suits/modifier.png" ) ,
+			"effects" : "" ,
+			"tooltip" : ""
+		}
+	} ,
+	"actions" : {}
+}
+
 const negoation_actions = [ "Think" ]
 
 var debug_obj = {
@@ -13,12 +56,14 @@ var debug_obj = {
 	} ,
 }
 
+var suit_choice = negotiation_entities.suits.keys().pick_random()
+
 var defaults = {
 	"card" : {
 		"quality" : {
 			"bg" : preload("res://assets/Card/Suits/Base_Suit.png") ,
 			"mode" : "Quality" ,
-			"name" : suits.pick_random() ,
+			"name" : suit_choice ,
 			"value" : values.pick_random() ,
 			"effects" : [] ,
 			"to_serialize" : {
