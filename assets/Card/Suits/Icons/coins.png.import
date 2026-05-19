@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdy2sh1amwr2a"
-path="res://.godot/imported/Clubs.png-c27f4e5dfa1e5014723289223c0ecd4d.ctex"
+uid="uid://ckbd40h5taf8j"
+path="res://.godot/imported/coins.png-518b743ae4d891606e26d5b385fbdf1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Suits/Clubs.png"
-dest_files=["res://.godot/imported/Clubs.png-c27f4e5dfa1e5014723289223c0ecd4d.ctex"]
+source_file="res://assets/Card/Suits/Icons/coins.png"
+dest_files=["res://.godot/imported/coins.png-518b743ae4d891606e26d5b385fbdf1a.ctex"]
 
 [params]
 

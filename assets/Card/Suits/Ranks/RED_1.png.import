@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yj0bqbpo1rxt"
-path="res://.godot/imported/Cups.png-7a12e743f106dbf4fb1d33fc71700b22.ctex"
+uid="uid://dt0d41t13gbxo"
+path="res://.godot/imported/RED_1.png-5b7d7f07c68960d0181bcae329dfa2e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Suits/Cups.png"
-dest_files=["res://.godot/imported/Cups.png-7a12e743f106dbf4fb1d33fc71700b22.ctex"]
+source_file="res://assets/Card/Suits/Ranks/RED_1.png"
+dest_files=["res://.godot/imported/RED_1.png-5b7d7f07c68960d0181bcae329dfa2e9.ctex"]
 
 [params]
 

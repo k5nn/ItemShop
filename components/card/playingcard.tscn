@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://fr5hvhkd50av"]
+
+[ext_resource type="Script" uid="uid://4y60hfe1nn35" path="res://components/card/playingcard.gd" id="1_ruxdt"]
+
+[node name="PlayingCard" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ruxdt")
+
+[node name="Art" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TopLeft" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+
+[node name="Rank" type="TextureRect" parent="TopLeft"]
+layout_mode = 2
+
+[node name="Suit" type="TextureRect" parent="TopLeft"]
+layout_mode = 2
+
+[node name="BottomRight" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_bottom = 4.0
+theme_override_constants/separation = 20
+
+[node name="Suit" type="TextureRect" parent="BottomRight"]
+layout_mode = 2
+
+[node name="Rank" type="TextureRect" parent="BottomRight"]
+layout_mode = 2

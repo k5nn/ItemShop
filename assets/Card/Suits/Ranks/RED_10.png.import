@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rl5pgk62sn7k"
-path="res://.godot/imported/Base_Suit.png-7cd8916cff7d0d5ed4f6f3121a65b197.ctex"
+uid="uid://bxt24ax8a78gj"
+path="res://.godot/imported/RED_10.png-c05c5bea23c2fffa14377dd1ec6d5581.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Card/Suits/Base_Suit.png"
-dest_files=["res://.godot/imported/Base_Suit.png-7cd8916cff7d0d5ed4f6f3121a65b197.ctex"]
+source_file="res://assets/Card/Suits/Ranks/RED_10.png"
+dest_files=["res://.godot/imported/RED_10.png-c05c5bea23c2fffa14377dd1ec6d5581.ctex"]
 
 [params]
 

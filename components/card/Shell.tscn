@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv3rjtrtrps1p"]
+
+[ext_resource type="Script" uid="uid://bfjdhxwo7fjqv" path="res://components/card/Shell.gd" id="1_ekfyb"]
+
+[node name="Shell" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ekfyb")
+
+[node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PopupAnchor" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PopupAnchor"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
