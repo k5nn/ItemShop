@@ -4,3 +4,9 @@
 
 [node name="Negotiation" type="Node2D"]
 script = ExtResource("1_mlm5i")
+
+[node name="Deck" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

@@ -31,7 +31,6 @@ func full_join( a : Set , b : Set ) -> Set:
 #read
 
 #update
-
 #update
 
 #delete
@@ -54,5 +53,22 @@ func filter(data_set: Set, predicate: Callable) -> Set:
 	for entry in data_set.values():
 		if predicate.call(entry):
 			result.add(entry)
+	return result
+
+func arr_to_set(input: Array) -> Set:
+	var result := Set.new()
+	
+	if input.is_empty() :
+		return result
+	
+	for item in input :
+		result.add( item )
+	
+	return result
+
+func set_to_arrdict(input: Set , target_dict : Dictionary) -> Array:
+	var result := []
+	for item in input.values() :
+		result.append( item[ target_dict ] )
 	return result
 #procedures / set utilities
